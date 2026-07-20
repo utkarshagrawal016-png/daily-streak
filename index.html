@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Streak Tracker</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+  }
+  h1 { margin-bottom: 5px; }
+  .subtitle { color: #8b949e; margin-bottom: 30px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 20px);
+    grid-auto-flow: column;
+    gap: 4px;
+  }
+  .day {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: #161b22; /* empty */
+  }
+  .done { background: #39d353; } /* filled = habit done that day */
+</style>
+</head>
+<body>
+
+<h1>🔥 Daily Streak Tracker</h1>
+<p class="subtitle">Japanese practice — day by day</p>
+
+<div class="grid" id="grid"></div>
+
+<script>
+  // Hardcoded data for now — true/false for each day (last 28 days)
+  const days = [
+    true, true, false, true, true, true, false,
+    true, true, true, true, false, true, true,
+    false, false, true, true, true, true, true,
+    true, true, false, true, true, true, true
+  ];
+
+  const grid = document.getElementById('grid');
+  days.forEach(done => {
+    const cell = document.createElement('div');
+    cell.className = 'day' + (done ? ' done' : '');
+    grid.appendChild(cell);
+  });
+</script>
+
+</body>
+</html>
