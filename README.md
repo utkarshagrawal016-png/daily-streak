@@ -16,3 +16,6 @@ Goal: visually motivating daily check-ins for habits (Japanese practice, coding,
 ## Tech
 - Plain HTML/CSS/JS to start (no framework overhead)
 - Can migrate to React later if it grows
+
+## Day 3 note
+   Away from laptop today — reviewed plan, will add interactivity tomorrow.
