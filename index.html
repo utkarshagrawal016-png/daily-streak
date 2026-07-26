@@ -38,7 +38,7 @@
 <div class="grid" id="grid"></div>
 
 <script>
-  // Hardcoded data for now — true/false for each day (last 28 days)
+  // Hardcoded data for past days (unchanged)
   const days = [
     true, true, false, true, true, true, false,
     true, true, true, true, false, true, true,
@@ -47,11 +47,25 @@
   ];
 
   const grid = document.getElementById('grid');
+
   days.forEach(done => {
     const cell = document.createElement('div');
     cell.className = 'day' + (done ? ' done' : '');
     grid.appendChild(cell);
   });
+
+  // NEW: today's box — clickable
+  const today = document.createElement('div');
+  today.className = 'day';
+  today.style.border = '2px solid #58a6ff'; // highlight today
+  today.style.cursor = 'pointer';
+  today.title = "Click to mark today's habit as done";
+
+  today.addEventListener('click', () => {
+    today.classList.toggle('done');
+  });
+
+  grid.appendChild(today);
 </script>
 
 </body>
