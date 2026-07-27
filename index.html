@@ -54,15 +54,23 @@
     grid.appendChild(cell);
   });
 
-  // NEW: today's box — clickable
+  // Today's box — now persists using localStorage
+  const todayKey = 'streak-' + new Date().toISOString().slice(0, 10); // e.g. "streak-2026-07-27"
+
   const today = document.createElement('div');
   today.className = 'day';
-  today.style.border = '2px solid #58a6ff'; // highlight today
+  today.style.border = '2px solid #58a6ff';
   today.style.cursor = 'pointer';
   today.title = "Click to mark today's habit as done";
 
+  // Load saved state on page load
+  if (localStorage.getItem(todayKey) === 'true') {
+    today.classList.add('done');
+  }
+
   today.addEventListener('click', () => {
     today.classList.toggle('done');
+    localStorage.setItem(todayKey, today.classList.contains('done'));
   });
 
   grid.appendChild(today);
