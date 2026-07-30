@@ -34,11 +34,10 @@
 
 <h1>🔥 Daily Streak Tracker</h1>
 <p class="subtitle">Japanese practice — day by day</p>
-
+<p id="streak-text" style="font-size: 20px; font-weight: bold; color: #58a6ff;"></p>
 <div class="grid" id="grid"></div>
 
 <script>
-  // Hardcoded data for past days (unchanged)
   const days = [
     true, true, false, true, true, true, false,
     true, true, true, true, false, true, true,
@@ -54,8 +53,7 @@
     grid.appendChild(cell);
   });
 
-  // Today's box — now persists using localStorage
-  const todayKey = 'streak-' + new Date().toISOString().slice(0, 10); // e.g. "streak-2026-07-27"
+  const todayKey = 'streak-' + new Date().toISOString().slice(0, 10);
 
   const today = document.createElement('div');
   today.className = 'day';
@@ -63,7 +61,6 @@
   today.style.cursor = 'pointer';
   today.title = "Click to mark today's habit as done";
 
-  // Load saved state on page load
   if (localStorage.getItem(todayKey) === 'true') {
     today.classList.add('done');
   }
@@ -71,9 +68,37 @@
   today.addEventListener('click', () => {
     today.classList.toggle('done');
     localStorage.setItem(todayKey, today.classList.contains('done'));
+    updateStreakDisplay();
   });
 
   grid.appendChild(today);
+
+  // NEW: streak counter logic
+  function calculateStreak() {
+    // Count backwards from the end of hardcoded days, then include today if done
+    let streak = 0;
+    const todayDone = localStorage.getItem(todayKey) === 'true';
+
+    if (todayDone) streak++;
+
+    for (let i = days.length - 1; i >= 0; i--) {
+      if (days[i]) {
+        streak++;
+      } else {
+        break;
+      }
+    }
+
+    return streak;
+  }
+
+  function updateStreakDisplay() {
+    const streak = calculateStreak();
+    document.getElementById('streak-text').textContent =
+      streak > 0 ? `🔥 ${streak} day streak` : `Start your streak today`;
+  }
+
+  updateStreakDisplay();
 </script>
 
 </body>
