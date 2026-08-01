@@ -5,7 +5,7 @@
 <title>Daily Streak Tracker</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background: #0d1117;
     color: #c9d1d9;
     display: flex;
@@ -13,21 +13,42 @@
     align-items: center;
     padding-top: 50px;
   }
-  h1 { margin-bottom: 5px; }
-  .subtitle { color: #8b949e; margin-bottom: 30px; }
+  h1 {
+    margin-bottom: 5px;
+    font-size: 28px;
+  }
+  .subtitle {
+    color: #8b949e;
+    margin-bottom: 10px;
+  }
+  #streak-text {
+    margin-bottom: 30px;
+    transition: transform 0.2s ease;
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(7, 20px);
     grid-auto-flow: column;
     gap: 4px;
+    padding: 20px;
+    background: #161b22;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   }
   .day {
     width: 20px;
     height: 20px;
     border-radius: 4px;
-    background: #161b22; /* empty */
+    background: #21262d;
+    transition: background 0.25s ease, transform 0.15s ease;
   }
-  .done { background: #39d353; } /* filled = habit done that day */
+  .day.done {
+    background: #39d353;
+    box-shadow: 0 0 6px rgba(57, 211, 83, 0.6);
+  }
+  .day:hover {
+    transform: scale(1.15);
+  }
 </style>
 </head>
 <body>
@@ -69,6 +90,9 @@
     today.classList.toggle('done');
     localStorage.setItem(todayKey, today.classList.contains('done'));
     updateStreakDisplay();
+    // little celebratory pop
+    today.style.transform = 'scale(1.4)';
+    setTimeout(() => { today.style.transform = ''; }, 150);
   });
 
   grid.appendChild(today);
