@@ -19,3 +19,5 @@ Goal: visually motivating daily check-ins for habits (Japanese practice, coding,
 
 ## Day 3 note
    Away from laptop today — reviewed plan, will add interactivity tomorrow.
+
+- [x] Later: deploy so it's usable from phone
